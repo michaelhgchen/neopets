@@ -1,0 +1,12 @@
+{
+  "name": "neopets",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:michaelhgchen/neopets.git",
+  "author": "Michael Chen <michaelhgchen@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "prompt": "1.0.0",
+    "puppeteer": "1.5"
+  }
+}
