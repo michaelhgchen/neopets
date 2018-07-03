@@ -5,9 +5,11 @@ const dailiesMapping = require('./dailies');
 const { login, logout } = require('./utilities');
 
 const browserConfig = process.env.NODE_ENV === 'production' ?
-  {} : {
+  {
+    slowMo: 100, // to avoid suspicion
+  } : {
     headless: false,
-    slowMo: 250
+    slowMo: 100
   };
 
 async function doDailies(config) {
@@ -17,18 +19,14 @@ async function doDailies(config) {
   const page = await browser.newPage();
 
   await login(page, username, password);
-  // TODO: create random event tracking decorator
 
-  dailies.forEach(async function({ dailyName, dailyConfig = {} }) {
-    try {
-      if(!dailiesMapping[dailyName]) throw new Error('DNE');
-      const daily = dailiesMapping[dailyName];
-      await daily(page, dailyConfig);
-    } catch(e) {
-      // TODO: add notification
-      console.log(`${dailyName} failed: ${e}`)
-    }
-  });
+  for (let i = 0; i < dailies.length; ++i) {
+    const { dailyName, dailyConfig } = dailies[i];
+    await dailiesMapping[dailyName](page, dailyConfig);
+    // TODO: add error handling
+  }
+
+  // TODO: create random event tracking decorator
 
   await logout(page);
 
@@ -54,42 +52,45 @@ prompt.get({
     username: result.username,
     password: result.password,
     dailies: [
+      // {
+      //   dailyName: 'trudysSurprise',
+      // },
       {
-        dailyName: 'trudysSurprise',
+        dailyName: 'bankInterest',
       },
-      // {
-      //   dailyName: 'bankInterest',
-      // },
-      // {
-      //   dailyName: 'shopOfOffers',
-      // },
-      // {
-      //   dailyName: 'monthlyFreebies',
-      // },
+      {
+        dailyName: 'shopOfOffers',
+      },
+      {
+        dailyName: 'monthlyFreebies',
+        dailyConfig: {
+          day: 1,
+        }
+      },
       // {
       //   dailyName: 'wheelOfMediocrity',
       // },
       // {
       //   dailyName: 'wheelOfExcitement',
       // },
-      // {
-      //   dailyName: 'tombola',
-      // },
-      // {
-      //   dailyName: 'fruitMachine',
-      // },
-      // {
-      //   dailyName: 'coltzansShrine',
-      // },
-      // {
-      //   dailyName: 'tdmbgpop',
-      // },
-      // {
-      //   dailyName: 'underwaterFishing',
-      // },
-      // {
-      //   dailyName: 'healingSprings',
-      // },
+      {
+        dailyName: 'tombola',
+      },
+      {
+        dailyName: 'fruitMachine',
+      },
+      {
+        dailyName: 'coltzansShrine',
+      },
+      {
+        dailyName: 'tdmbgpop',
+      },
+      {
+        dailyName: 'underwaterFishing',
+      },
+      {
+        dailyName: 'healingSprings',
+      },
       // {
       //   dailyName: 'buriedTreasure',
       // },
