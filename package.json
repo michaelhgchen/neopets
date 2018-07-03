@@ -5,8 +5,16 @@
   "repository": "git@github.com:michaelhgchen/neopets.git",
   "author": "Michael Chen <michaelhgchen@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "lint": "eslint . --fix"
+  },
   "dependencies": {
     "prompt": "1.0.0",
     "puppeteer": "1.5"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0"
   }
 }

@@ -1,5 +1,6 @@
 const bankInterest = require('./bankInterest');
 const buriedTreasure = require('./buriedTreasure');
+const coltzansShrine = require('./coltzansShrine');
 const fruitMachine = require('./fruitMachine');
 const healingSprings = require('./healingSprings');
 const monthlyFreebies = require('./monthlyFreebies');
@@ -14,6 +15,7 @@ const wheelOfMediocrity = require('./wheelOfMediocrity');
 module.exports = {
   bankInterest,
   buriedTreasure,
+  coltzansShrine,
   fruitMachine,
   healingSprings,
   monthlyFreebies,
@@ -23,5 +25,5 @@ module.exports = {
   trudysSurprise,
   underwaterFishing,
   wheelOfExcitement,
-  wheelOfMediocrity
+  wheelOfMediocrity,
 };
